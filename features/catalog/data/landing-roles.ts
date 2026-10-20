@@ -1,9 +1,9 @@
 /**
- * Reparto de las imágenes de la portada.
+ * Reparto de las imágenes del bloque de marketing del reproductor.
  *
  * `landing-preview.ts` trae los 16 títulos reales de TMDB; aquí solo se decide
  * qué arte cumple cada papel. Se resuelve por id (no por posición) para que
- * reordenar la vista previa no cambie la composición de la portada.
+ * reordenar la vista previa no cambie la composición de la sección.
  */
 import { PREVIEW_TITLES, type PreviewTitle } from "@/features/catalog/data/landing-preview";
 
@@ -16,9 +16,6 @@ function pick(tmdbId: number): PreviewTitle {
 
   return title;
 }
-
-/** Fotografía media columna que separa el capítulo del catálogo. */
-export const LANDING_CHAPTER = pick(1368337);
 
 /** Fotograma cuadrado de cada fuente del reproductor (TMDB, YouTube, VidSrc). */
 export const LANDING_SOURCES: readonly [PreviewTitle, PreviewTitle, PreviewTitle] = [

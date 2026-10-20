@@ -1,3 +1,5 @@
+import type { TmdbMovieListItem } from "@/types/tmdb";
+
 /**
  * Vista de una película para las listas del catálogo (tarjetas y carruseles).
  *
@@ -32,3 +34,23 @@ export type MovieSummary = {
    */
   rating: number | null;
 };
+
+/**
+ * Traduce un ítem de listado de TMDB a la vista que consume la tarjeta.
+ *
+ * Existe para que el corte de datos esté decidido en un solo sitio: la portada
+ * (#12), la búsqueda (#13) y la rejilla del catálogo (#14) construirán filas de
+ * tarjetas, y todas deben traducir `release_date` y `vote_average` igual.
+ */
+export function toMovieSummary(item: TmdbMovieListItem): MovieSummary {
+  return {
+    id: item.id,
+    title: item.title,
+    posterPath: item.poster_path,
+    // Mismo corte que en el hero: TMDB trae `YYYY-MM-DD` y a veces vacío.
+    year: item.release_date.slice(0, 4) || null,
+    // Un `0` no es una nota baja, es la ausencia de votos: se esconde.
+    rating: item.vote_average > 0 ? item.vote_average : null,
+    overview: item.overview.trim() || null,
+  };
+}

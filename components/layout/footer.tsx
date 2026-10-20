@@ -7,8 +7,6 @@ import { PROJECT_URL } from "@/constants/landing";
 /** Enlaces de servicio: los mismos destinos que la barra superior, más el código. */
 const footerLinks: { label: string; href: string; external?: boolean }[] = [
   { label: "Catálogo", href: "/#catalogo" },
-  { label: "Reproductor", href: "/#reproductor" },
-  { label: "Funciones", href: "/#funciones" },
   { label: "Design system", href: "/design" },
   { label: "GitHub", href: PROJECT_URL, external: true },
 ];

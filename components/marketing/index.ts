@@ -1,5 +1,4 @@
 export { CapabilityModules } from "./capability-modules";
-export { CatalogChapters } from "./catalog-chapters";
 export { ExploreBand } from "./explore-band";
 export { FootageBand } from "./footage-band";
 export { RevealOnScroll } from "./reveal-on-scroll";
