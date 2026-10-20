@@ -1,4 +1,4 @@
-# ShieldFlix — Roadmap de Desarrollo (Sprints + Issues + Commits)
+# SokoviaPlay — Roadmap de Desarrollo (Sprints + Issues + Commits)
 
 > Arquitectura desacoplada: **Frontend Next.js (App Router)** en Vercel + **Supabase/PostgreSQL**. Integración obligatoria: **TMDB API** (metadatos) + **vidsrc.to** (embed película completa) + **YouTube** (tráiler).
 

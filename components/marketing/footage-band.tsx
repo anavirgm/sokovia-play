@@ -73,7 +73,7 @@ export function FootageBand() {
 
         <p className="reveal mt-4 max-w-[62ch] text-base leading-relaxed text-muted [animation-delay:60ms]">
           Un proyectorista cargando bobinas en el cine Nova de Bruselas. Es el mismo oficio que
-          ShieldFlix mete en una ficha: encontrar la copia, comprobar que responde y no perder el
+          SokoviaPlay mete en una ficha: encontrar la copia, comprobar que responde y no perder el
           minuto.
         </p>
 

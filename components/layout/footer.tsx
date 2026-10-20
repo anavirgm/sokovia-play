@@ -29,7 +29,7 @@ export function Footer() {
       <div className="bg-foreground text-background">
         <div className="@container mx-auto w-full max-w-[88rem] px-4 pt-10 pb-4 sm:px-6">
           <p className="text-right text-[17cqw] leading-[0.85] font-semibold tracking-[-0.05em]">
-            ShieldFlix
+            SokoviaPlay
           </p>
         </div>
       </div>
@@ -41,7 +41,7 @@ export function Footer() {
               <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-brand/15 text-brand-soft">
                 <ShieldCheck className="size-4" aria-hidden="true" />
               </span>
-              <span className="text-base font-semibold">ShieldFlix</span>
+              <span className="text-base font-semibold">SokoviaPlay</span>
             </p>
 
             <p className="text-sm leading-relaxed text-muted">
@@ -75,7 +75,7 @@ export function Footer() {
 
         <Container className="pb-12">
           <p className="text-sm text-muted">
-            © ShieldFlix. Proyecto de portafolio, datos de catálogo por TMDB.
+            © SokoviaPlay. Proyecto de portafolio, datos de catálogo por TMDB.
           </p>
         </Container>
       </div>

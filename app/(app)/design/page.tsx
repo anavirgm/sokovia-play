@@ -16,7 +16,7 @@ import type { MovieSummary } from "@/features/catalog/movie";
 
 export const metadata: Metadata = {
   title: "Design system",
-  description: "Tokens, primitivas y estados de la interfaz de ShieldFlix.",
+  description: "Tokens, primitivas y estados de la interfaz de SokoviaPlay.",
 };
 
 const swatches: { name: string; className: string }[] = [
@@ -121,7 +121,7 @@ export default function DesignSystemPage() {
 
         <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">Design system</h1>
         <p className="max-w-2xl text-pretty text-muted">
-          Fuente de verdad de los tokens y primitivas de ShieldFlix. Cada componente se documenta
+          Fuente de verdad de los tokens y primitivas de SokoviaPlay. Cada componente se documenta
           con sus variantes y estados para mantener la interfaz coherente.
         </p>
       </Container>

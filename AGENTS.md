@@ -10,7 +10,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 ## Diseño UI/UX (obligatorio)
 
-Todo el código de interfaz de ShieldFlix (componentes, páginas, layouts, estilos) se trabaja con estas skills globales de OpenCode, cargándolas con la herramienta `skill` antes de escribir o revisar UI:
+Todo el código de interfaz de SokoviaPlay (componentes, páginas, layouts, estilos) se trabaja con estas skills globales de OpenCode, cargándolas con la herramienta `skill` antes de escribir o revisar UI:
 
 - `ui-ux-pro-max` — criterio UI/UX, design system, tokens, tipografía, color, accesibilidad, gráficos y reglas de interacción.
 - `impeccable` — dirección de diseño, jerarquía, layout, motion, copy de UX, auditoría y pulido.

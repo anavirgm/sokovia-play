@@ -14,14 +14,14 @@ export function Header() {
       <Container className="flex h-16 items-center gap-3">
         <Link
           href="/"
-          aria-label="ShieldFlix, inicio"
+          aria-label="SokoviaPlay, inicio"
           className="flex shrink-0 items-center gap-2 rounded-xl outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
         >
           <span className="grid size-9 place-items-center rounded-xl bg-brand/15 text-brand-soft ring-1 ring-brand/30 ring-inset">
             <ShieldCheck className="size-5" aria-hidden="true" />
           </span>
           <span className="text-lg font-semibold tracking-tight">
-            Shield<span className="text-brand">Flix</span>
+            Sokovia<span className="text-brand">Play</span>
           </span>
         </Link>
 

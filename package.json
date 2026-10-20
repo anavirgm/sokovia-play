@@ -1,5 +1,5 @@
 {
-  "name": "shield-flix",
+  "name": "sokovia-play",
   "version": "0.1.0",
   "private": true,
   "description": "Plataforma de streaming híbrida (Next.js + Supabase + TMDB + vidsrc.to)",

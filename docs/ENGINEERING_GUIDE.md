@@ -1,4 +1,4 @@
-# ShieldFlix — Guía de Ingeniería, Calidad y Ciberseguridad
+# SokoviaPlay — Guía de Ingeniería, Calidad y Ciberseguridad
 
 > Orientado a Clean Code, SOLID, seguridad web y rendimiento. Aplicable durante todo el desarrollo (Sprints 1–4).
 
@@ -62,7 +62,7 @@ Reglas: marcar server-only con `import 'server-only'`. Validar con Zod en arranq
 ## 2. Arquitectura, SOLID y Limpieza de Código
 
 ### 2.1 Principios SOLID
-| Principio | Aplicación en ShieldFlix |
+| Principio | Aplicación en SokoviaPlay |
 |---|---|
 | S (Single Responsibility) | Componentes pequeños (MovieCard solo presentación). Utils puras. |
 | O (Open/Closed) | Primitivas UI extensibles por props/variants (class-variance-authority). |
@@ -78,7 +78,7 @@ Reglas: marcar server-only con `import 'server-only'`. Validar con Zod en arranq
 
 ### 2.3 Estructura de Carpetas (objetivo Sprint 1)
 ```text
-shield-flix/
+sokovia-play/
 ├── app/                    # App Router (routes, layouts, loading.tsx, error.tsx, not-found.tsx, global-error.tsx)
 │   ├── (auth)/             # auth routes
 │   ├── (public)/           # home/explore/search/movies/watch/favorites

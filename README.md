@@ -1,10 +1,10 @@
-# ShieldFlix
+# SokoviaPlay
 
 > Plataforma web de streaming híbrida profesional, minimalista y cinematográfica. Desarrollada como pieza central de un **portafolio de ingeniería de software de nivel senior**.
 
 ## 1. Visión General
 
-**ShieldFlix** es una aplicación web que combina catálogo de **TMDB**, reproducción con **vidsrc.to** (película completa) y **YouTube** (tráiler), autenticación con **Supabase**, favoritos, historial con reanudación ("Continuar Viendo") y un **Admin Dashboard** en tiempo real.
+**SokoviaPlay** es una aplicación web que combina catálogo de **TMDB**, reproducción con **vidsrc.to** (película completa) y **YouTube** (tráiler), autenticación con **Supabase**, favoritos, historial con reanudación ("Continuar Viendo") y un **Admin Dashboard** en tiempo real.
 
 **Stack principal:**
 - **Frontend:** [Next.js 16](https://nextjs.org/) (App Router, Turbopack) + [React 19](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/) (strict)
@@ -58,7 +58,7 @@ Backend/DB (Supabase)
 ### 4.1 Estructura de carpetas
 
 ```text
-shield-flix/
+sokovia-play/
 ├── app/                    # App Router: rutas, layouts, loading.tsx, error.tsx, not-found.tsx
 ├── actions/                # Server Actions (auth, favoritos, historial, CRUD admin)
 ├── components/
@@ -85,7 +85,7 @@ shield-flix/
 ### 5.1 Clonar repositorio
 ```bash
 git clone <repo-url>
-cd shield-flix
+cd sokovia-play
 ```
 
 ### 5.2 Instalar dependencias
