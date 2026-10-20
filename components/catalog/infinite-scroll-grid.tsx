@@ -3,12 +3,13 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { TriangleAlert } from "lucide-react";
 
-import { Button, Skeleton } from "@/components/ui";
+import { Button } from "@/components/ui";
 import type { BrowseOutcome } from "@/features/catalog/browse";
 import type { MovieSummary } from "@/features/catalog/movie";
 
 import { MovieCard } from "./movie-card";
 import { MovieGrid } from "./movie-grid";
+import { MovieCardSkeleton } from "./skeletons";
 
 /**
  * Cuadrícula del catálogo que crece al hacer scroll.
@@ -177,10 +178,8 @@ export function InfiniteScrollGrid({
 
         {isLoading
           ? Array.from({ length: SKELETON_CARDS }, (_, card) => (
-              <li key={`skeleton-${card}`} className="flex flex-col gap-2.5">
-                <Skeleton className="aspect-[2/3] w-full" />
-                <Skeleton className="h-4 w-4/5" />
-                <Skeleton className="h-3.5 w-1/3" />
+              <li key={`skeleton-${card}`}>
+                <MovieCardSkeleton />
               </li>
             ))
           : null}

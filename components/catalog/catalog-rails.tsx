@@ -3,8 +3,9 @@ import { Suspense } from "react";
 import { MovieCard } from "@/components/catalog/movie-card";
 import { MovieSlider } from "@/components/catalog/movie-slider";
 import { Container } from "@/components/layout/container";
-import { Skeleton } from "@/components/ui";
 import { getCatalogRails } from "@/features/catalog/rails";
+
+import { SliderSkeleton } from "./skeletons";
 
 /**
  * Filas del catálogo de la portada.
@@ -48,23 +49,17 @@ async function CatalogRailsContent() {
 /**
  * Respaldo de carga: la geometría de las filas, sin contenido que leer.
  *
- * Replica el ancho de las tarjetas de `MovieSlider`; el esqueleto definitivo,
- * con su shimmer y su anuncio a lectores de pantalla, es del #15.
+ * Son los esqueletos del catálogo (#15), no marcador ad-hoc: mismo ancho de
+ * tarjeta, mismo barrido y mismo anuncio de ocupación que la fila real, para
+ * que el paso de respaldo a datos no se note ni en la retícula ni en lector
+ * de pantalla. La portada lo reutiliza en su `loading.tsx` de ruta, así que
+ * ambos niveles muestran exactamente lo mismo.
  */
-function CatalogRailsFallback() {
+export function CatalogRailsFallback() {
   return (
     <div aria-busy="true" className="flex flex-col gap-10 sm:gap-12">
       {Array.from({ length: FALLBACK_RAILS }, (_, row) => (
-        <div key={row} className="flex flex-col gap-4">
-          <Skeleton className="h-7 w-40" />
-          <ul className="flex gap-4">
-            {Array.from({ length: FALLBACK_CARDS }, (_, card) => (
-              <li key={card} className="w-36 shrink-0 sm:w-44 lg:w-48">
-                <Skeleton className="aspect-[2/3] w-full" />
-              </li>
-            ))}
-          </ul>
-        </div>
+        <SliderSkeleton key={row} />
       ))}
     </div>
   );
@@ -72,6 +67,3 @@ function CatalogRailsFallback() {
 
 /** Filas que muestra el respaldo: la parte que cabe en la primera pantalla. */
 const FALLBACK_RAILS = 3;
-
-/** Tarjetas por fila en el respaldo: suficiente para llenar el ancho visible. */
-const FALLBACK_CARDS = 8;

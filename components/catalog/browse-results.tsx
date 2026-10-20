@@ -8,6 +8,7 @@ import { cn } from "@/utils/cn";
 
 import { InfiniteScrollGrid } from "./infinite-scroll-grid";
 import { MovieGrid } from "./movie-grid";
+import { MovieCardSkeleton } from "./skeletons";
 
 /**
  * Bloque de resultados de la exploración.
@@ -79,19 +80,17 @@ const FALLBACK_CARDS = 12;
 /**
  * Respaldo mientras llega la primera página.
  *
- * Replica la geometría de la cuadrícula para que el contenido no salte. El
- * esqueleto definitivo —con su anuncio a lectores de pantalla— es del #15, igual
- * que en la portada y la búsqueda.
+ * Son los esqueletos del catálogo (#15) sobre la cuadrícula real: reservan la
+ * misma altura que las tarjetas definitivas para que el scroll no salte, y el
+ * botón bloqueado ocupa el sitio que luego ocupa «Cargar más».
  */
 export function BrowseResultsFallback() {
   return (
     <div aria-busy="true" className="flex flex-col gap-3">
       <MovieGrid>
         {Array.from({ length: FALLBACK_CARDS }, (_, card) => (
-          <li key={card} className="flex flex-col gap-2.5">
-            <Skeleton className="aspect-[2/3] w-full" />
-            <Skeleton className="h-4 w-4/5" />
-            <Skeleton className="h-3.5 w-1/3" />
+          <li key={card}>
+            <MovieCardSkeleton />
           </li>
         ))}
       </MovieGrid>

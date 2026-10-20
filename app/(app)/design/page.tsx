@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 import { ArrowLeft, CircleCheck, Info, Play, TriangleAlert } from "lucide-react";
 
-import { MovieCard, MovieSlider } from "@/components/catalog";
+import { MovieCard, MovieCardSkeleton, MovieSlider, SliderSkeleton } from "@/components/catalog";
 import { Container } from "@/components/layout/container";
 import { Badge, Button, Input, Skeleton, Spinner } from "@/components/ui";
 import {
@@ -265,6 +265,20 @@ export default function DesignSystemPage() {
               <Skeleton className="h-40" />
               <Skeleton className="h-40" />
             </div>
+
+            {/* Tarjeta real frente a su esqueleto: reservan exactamente lo mismo. */}
+            <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-6">
+              <div className="flex flex-col gap-2.5">
+                <MovieCard movie={DESIGN_PREVIEW_LINKED} />
+              </div>
+              <MovieCardSkeleton />
+              <MovieCardSkeleton />
+              <MovieCardSkeleton />
+              <MovieCardSkeleton />
+              <MovieCardSkeleton />
+            </div>
+
+            <SliderSkeleton />
           </div>
         </Section>
 

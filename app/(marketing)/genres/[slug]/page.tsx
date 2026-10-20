@@ -9,6 +9,7 @@ import {
   BrowseResultsFallback,
   GenreHeaderFallback,
   GenreNav,
+  GenreNavSkeleton,
 } from "@/components/catalog";
 import { Container } from "@/components/layout/container";
 import { MOVIE_GENRES, genreBySlug } from "@/constants/genres";
@@ -52,6 +53,7 @@ export default function GenrePage({ params }: PageProps<"/genres/[slug]">) {
           fallback={
             <div className="flex flex-col gap-8 sm:gap-10">
               <GenreHeaderFallback />
+              <GenreNavSkeleton />
               <BrowseResultsFallback />
             </div>
           }

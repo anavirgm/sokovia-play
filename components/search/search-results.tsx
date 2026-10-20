@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { MovieCard } from "@/components/catalog/movie-card";
 import { MovieGrid } from "@/components/catalog/movie-grid";
+import { MovieCardSkeleton } from "@/components/catalog/skeletons";
 import { Skeleton, buttonVariants } from "@/components/ui";
 import { getSearchOutcome } from "@/features/catalog/search";
 import { cn } from "@/utils/cn";
@@ -136,9 +137,9 @@ function SearchPagination({ text, page, totalPages }: SearchPaginationProps) {
 /**
  * Respaldo de carga de los resultados.
  *
- * Replica la geometría de la cuadrícula para que el contenido no salte cuando
- * llega. El esqueleto definitivo —con el anuncio a lectores de pantalla— es del
- * #15, igual que en la portada.
+ * Son los esqueletos del catálogo (#15) sobre la cuadrícula real: la línea de
+ * recuento reserva el sitio del contador y las tarjetas reservan la altura, así
+ * que cuando llega la respuesta de TMDB el contenido no salta.
  */
 export function SearchResultsFallback() {
   return (
@@ -147,10 +148,8 @@ export function SearchResultsFallback() {
 
       <MovieGrid>
         {Array.from({ length: FALLBACK_CARDS }, (_, card) => (
-          <li key={card} className="flex flex-col gap-2.5">
-            <Skeleton className="aspect-[2/3] w-full" />
-            <Skeleton className="h-4 w-4/5" />
-            <Skeleton className="h-3.5 w-1/3" />
+          <li key={card}>
+            <MovieCardSkeleton />
           </li>
         ))}
       </MovieGrid>
