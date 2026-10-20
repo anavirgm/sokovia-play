@@ -1,16 +1,16 @@
 import Link from "next/link";
 import { Clapperboard, SearchX, TriangleAlert } from "lucide-react";
-import type { ReactNode } from "react";
 
-import { buttonVariants } from "@/components/ui";
+import { Notice, buttonVariants } from "@/components/ui";
 import { cn } from "@/utils/cn";
 
 /**
  * Estados de la búsqueda: sin consulta, sin resultados y error.
  *
- * Los tres comparten el mismo armazón para que la página no cambie de forma
- * según lo que devuelva TMDB: icono, un titular y una salida. Una búsqueda sin
- * resultados no es un callejón sin salida, y un error de TMDB tampoco.
+ * Los tres comparten el mismo armazón (`Notice`) para que la página no cambie
+ * de forma según lo que devuelva TMDB: icono, un titular y una salida. Una
+ * búsqueda sin resultados no es un callejón sin salida, y un error de TMDB
+ * tampoco.
  */
 
 /**
@@ -21,31 +21,6 @@ import { cn } from "@/utils/cn";
  * búsqueda —no como enlaces a fichas— porque las fichas aún no existen (#18).
  */
 const SUGGESTIONS = ["Dune", "Oppenheimer", "El padrino", "Interstellar"] as const;
-
-type SearchMessageProps = {
-  icon: ReactNode;
-  title: string;
-  description: ReactNode;
-  /** Salidas: sugerencias, enlaces al catálogo. */
-  children?: ReactNode;
-};
-
-function SearchMessage({ icon, title, description, children }: SearchMessageProps) {
-  return (
-    <div className="flex flex-col items-center gap-5 rounded-xl border border-border/70 bg-surface/40 px-6 py-14 text-center sm:py-16">
-      <span className="grid size-14 place-items-center rounded-xl bg-brand/10 text-brand-soft ring-1 ring-brand/20 ring-inset">
-        {icon}
-      </span>
-
-      <div className="flex max-w-md flex-col gap-2">
-        <h2 className="text-xl font-semibold tracking-tight text-balance">{title}</h2>
-        <p className="text-sm text-pretty text-muted">{description}</p>
-      </div>
-
-      {children}
-    </div>
-  );
-}
 
 /** Píldoras de búsquedas de ejemplo: un atajo, no la única forma de empezar. */
 function SuggestionLinks({ label }: { label: string }) {
@@ -71,13 +46,13 @@ function SuggestionLinks({ label }: { label: string }) {
 /** Estado inicial: no hay consulta, así que no se ha llamado a TMDB. */
 export function SearchIdle() {
   return (
-    <SearchMessage
+    <Notice
       icon={<Clapperboard className="size-6" aria-hidden="true" />}
       title="¿Qué quieres ver hoy?"
       description="Escribe el título de una película y los resultados aparecerán aquí. Sin prisa: puedes empezar por una de estas búsquedas."
     >
       <SuggestionLinks label="Búsquedas de ejemplo" />
-    </SearchMessage>
+    </Notice>
   );
 }
 
@@ -97,7 +72,7 @@ export function SearchNoResults({
   // búsqueda no tiene ningún resultado, la página 2 no cambia el mensaje.
   if (page > 1 && totalResults > 0) {
     return (
-      <SearchMessage
+      <Notice
         icon={<SearchX className="size-6" aria-hidden="true" />}
         title="Esta página ya no tiene resultados"
         description={`La búsqueda de «${text}» no llega tan lejos. Vuelve al principio y sigue desde ahí.`}
@@ -108,25 +83,25 @@ export function SearchNoResults({
         >
           Ver desde el principio
         </Link>
-      </SearchMessage>
+      </Notice>
     );
   }
 
   return (
-    <SearchMessage
+    <Notice
       icon={<SearchX className="size-6" aria-hidden="true" />}
       title={`Sin resultados para «${text}»`}
       description="Prueba con otro título, revisa la ortografía o explora el catálogo por género. A veces el nombre en español no es el que recordamos."
     >
       <SuggestionLinks label="Prueba con" />
-    </SearchMessage>
+    </Notice>
   );
 }
 
 /** TMDB no respondió, o respondió algo que no se puede usar. */
 export function SearchError({ message }: { message: string }) {
   return (
-    <SearchMessage
+    <Notice
       icon={<TriangleAlert className="size-6" aria-hidden="true" />}
       title="No pudimos buscar"
       description={message}
@@ -134,6 +109,6 @@ export function SearchError({ message }: { message: string }) {
       <Link href="/" className={cn(buttonVariants({ variant: "secondary" }))}>
         Volver al catálogo
       </Link>
-    </SearchMessage>
+    </Notice>
   );
 }

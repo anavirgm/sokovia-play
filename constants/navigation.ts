@@ -1,9 +1,9 @@
 /**
  * Navegación principal del sitio.
  *
- * En el Sprint 1 solo existen la home y el design system. Las rutas de catálogo
- * (`/peliculas`, `/series`, `/mi-lista`) se añadirán junto a sus páginas para no
- * dejar enlaces rotos.
+ * Solo se listan rutas que existen: un enlace roto en la cabecera se ve en todas
+ * las páginas. Las rutas de series, mi lista y ficha de película (#18) se
+ * añadirán junto a sus páginas.
  */
 export type NavItem = {
   label: string;
@@ -13,5 +13,6 @@ export type NavItem = {
 export const navItems: NavItem[] = [
   { label: "Inicio", href: "/" },
   { label: "Catálogo", href: "/#catalogo" },
+  { label: "Explorar", href: "/explore" },
   { label: "Design system", href: "/design" },
 ];

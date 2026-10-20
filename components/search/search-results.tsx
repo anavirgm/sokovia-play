@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { MovieCard } from "@/components/catalog/movie-card";
+import { MovieGrid } from "@/components/catalog/movie-grid";
 import { Skeleton, buttonVariants } from "@/components/ui";
 import { getSearchOutcome } from "@/features/catalog/search";
 import { cn } from "@/utils/cn";
@@ -14,13 +15,9 @@ import { SearchError, SearchIdle, SearchNoResults } from "./search-states";
  * búsqueda y su estado inicial llegan al navegador antes que la respuesta de
  * TMDB, y la lista se rellena cuando está lista en lugar de retrasar la página
  * entera. La cuadrícula y la paginación son enlaces de verdad —compartibles y
- * navegables sin JavaScript—; el scroll infinito llega en el #14 sobre esta
- * misma base.
+ * navegables sin JavaScript—; la exploración por género del #14 usa scroll
+ * infinito sobre esta misma geometría de tarjetas.
  */
-
-/** Geometría compartida por la cuadrícula real y su esqueleto de carga. */
-const GRID_CLASS =
-  "grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6";
 
 /** Tarjetas del esqueleto: dos filas completas en escritorio. */
 const FALLBACK_CARDS = 12;
@@ -60,13 +57,13 @@ export async function SearchResults({ query, page }: SearchResultsProps) {
         <span className="font-medium text-foreground">«{outcome.text}»</span>
       </p>
 
-      <ul className={GRID_CLASS}>
+      <MovieGrid>
         {outcome.movies.map((movie) => (
           <li key={movie.id}>
             <MovieCard movie={movie} />
           </li>
         ))}
-      </ul>
+      </MovieGrid>
 
       {outcome.totalPages > 1 ? (
         <SearchPagination text={outcome.text} page={outcome.page} totalPages={outcome.totalPages} />
@@ -148,7 +145,7 @@ export function SearchResultsFallback() {
     <div aria-busy="true" className="flex flex-col gap-8 sm:gap-10">
       <Skeleton className="h-5 w-56" />
 
-      <ul className={GRID_CLASS}>
+      <MovieGrid>
         {Array.from({ length: FALLBACK_CARDS }, (_, card) => (
           <li key={card} className="flex flex-col gap-2.5">
             <Skeleton className="aspect-[2/3] w-full" />
@@ -156,7 +153,7 @@ export function SearchResultsFallback() {
             <Skeleton className="h-3.5 w-1/3" />
           </li>
         ))}
-      </ul>
+      </MovieGrid>
     </div>
   );
 }

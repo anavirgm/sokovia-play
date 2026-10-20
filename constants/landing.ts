@@ -6,6 +6,8 @@
  * `constants/navigation.ts`, que describe la navegación de todo el sitio.
  */
 
+import { genreById } from "./genres";
+
 /** Repositorio público: el destino real del proyecto durante el Sprint 1. */
 export const PROJECT_URL = "https://github.com/anavirgm/sokovia-play";
 
@@ -29,23 +31,22 @@ export type CatalogGenreRail = {
 /**
  * Géneros que abren fila en la portada.
  *
- * Son ocho de los diecinueve que tiene TMDB, elegidos a mano. La portada es
+ * Son ocho de los diecinueve de la taxonomía, elegidos a mano. La portada es
  * idéntica para todo el mundo —todavía no hay datos de cada usuario— y ahí una
  * selección fija rinde más que volcar la lista completa: las filas flojas
  * (documental, western, película de TV) y la repetición de los mismos títulos en
- * cinco filas desgastan más de lo que suman. La taxonomía entera no se pierde:
- * la recorre `/explore` con sus filtros (#14).
+ * cinco filas desgastan más de lo que suman. La taxonomía entera se recorre en
+ * `/explore` y en cada `/genres/[slug]`.
  *
- * El nombre lo pone el proyecto, no TMDB: el título de una fila es una decisión
+ * El nombre lo pone la taxonomía, no TMDB: el título de una fila es una decisión
  * editorial, no un dato de la API. Los ids sí son los de TMDB, que son fijos.
  */
-export const CATALOG_GENRE_RAILS: readonly CatalogGenreRail[] = [
-  { id: 28, label: "Acción" },
-  { id: 35, label: "Comedia" },
-  { id: 18, label: "Drama" },
-  { id: 27, label: "Terror" },
-  { id: 878, label: "Ciencia ficción" },
-  { id: 16, label: "Animación" },
-  { id: 53, label: "Suspense" },
-  { id: 12, label: "Aventura" },
-];
+const CATALOG_GENRE_IDS = [28, 35, 18, 27, 878, 16, 53, 12] as const;
+
+export const CATALOG_GENRE_RAILS: readonly CatalogGenreRail[] = CATALOG_GENRE_IDS.flatMap((id) => {
+  const genre = genreById(id);
+
+  // Un id que no exista en la taxonomía es un error de edición, no una razón
+  // para romper la portada: se omite la fila y el resto sigue en pie.
+  return genre ? [{ id: genre.id, label: genre.label }] : [];
+});
