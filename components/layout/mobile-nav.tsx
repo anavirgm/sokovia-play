@@ -56,7 +56,12 @@ export function MobileNav() {
             ))}
           </ul>
 
-          <form role="search" action="/" className="relative mt-4">
+          <form
+            role="search"
+            aria-label="Búsqueda rápida"
+            action="/search"
+            className="relative mt-4"
+          >
             <label htmlFor="mobile-search" className="sr-only">
               Buscar títulos
             </label>
@@ -64,7 +69,14 @@ export function MobileNav() {
               className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted"
               aria-hidden="true"
             />
-            <Input id="mobile-search" name="q" placeholder="Buscar títulos…" className="pl-9" />
+            <Input
+              id="mobile-search"
+              name="q"
+              type="search"
+              enterKeyHint="search"
+              placeholder="Buscar títulos…"
+              className="pl-9 [&::-webkit-search-cancel-button]:appearance-none"
+            />
           </form>
 
           <Button block className="mt-3">

@@ -44,7 +44,14 @@ export function Header() {
         </nav>
 
         <div className="ml-auto flex items-center gap-2">
-          <form role="search" action="/" className="relative hidden sm:block">
+          {/* Formulario GET puro: sin JavaScript, busca igual. La búsqueda con
+              debounce vive en la propia página `/search`; aquí basta con llegar. */}
+          <form
+            role="search"
+            aria-label="Búsqueda rápida"
+            action="/search"
+            className="relative hidden sm:block"
+          >
             <label htmlFor="site-search" className="sr-only">
               Buscar títulos
             </label>
@@ -55,8 +62,10 @@ export function Header() {
             <Input
               id="site-search"
               name="q"
+              type="search"
+              enterKeyHint="search"
               placeholder="Buscar títulos…"
-              className="h-10 w-52 pl-9 xl:w-72"
+              className="h-10 w-52 pl-9 xl:w-72 [&::-webkit-search-cancel-button]:appearance-none"
             />
           </form>
 
