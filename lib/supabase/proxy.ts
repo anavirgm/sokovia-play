@@ -24,7 +24,7 @@ import type { Database } from "@/types/database.types";
  *  nunca solo en el proxy.
  */
 
-const PROTECTED_PATHS = ["/account"] as const;
+const PROTECTED_PATHS = ["/admin"] as const;
 
 function isProtectedPath(pathname: string): boolean {
   return PROTECTED_PATHS.some((p) => pathname === p || pathname.startsWith(`${p}/`));

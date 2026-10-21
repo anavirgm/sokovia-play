@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { toAuthErrorMessage } from "@/features/auth/messages";
-import { magicLinkSchema, signInSchema, signUpSchema } from "@/features/auth/validation";
+import { signInSchema } from "@/features/auth/validation";
 
 /**
  * Estado devuelto por las acciones de autenticación.
@@ -23,25 +23,15 @@ export type AuthState = {
   needsEmailConfirmation?: boolean;
 };
 
-function getBaseUrl(): string {
-  // En desarrollo con `next dev` podemos inferirlo. En producción debe venir
-  // configurado en las variables de entorno si se necesita.
-  const envUrl = process.env.NEXT_PUBLIC_SITE_URL ?? process.env.NEXT_PUBLIC_APP_URL;
-  if (envUrl) {
-    return envUrl.replace(/\/$/, "");
-  }
-  // Fallback razonable: el redirect callback funcionará si Site URL está
-  // configurado en el dashboard de Supabase. Para localhost es seguro.
-  return "http://localhost:3000";
-}
-
 function sanitizeNextPath(raw: string | null): string {
-  if (!raw) return "/account";
+  if (!raw) return "/admin";
   // Solo rutas relativas para evitar open redirect
-  if (!raw.startsWith("/")) return "/account";
-  if (raw.startsWith("//")) return "/account";
+  if (!raw.startsWith("/")) return "/admin";
+  if (raw.startsWith("//")) return "/admin";
   // Evitar loops hacia login
-  if (raw.startsWith("/login")) return "/account";
+  if (raw.startsWith("/login")) return "/admin";
+  // Solo permitir /admin para el admin
+  if (!raw.startsWith("/admin")) return "/admin";
   return raw;
 }
 
@@ -85,97 +75,26 @@ export async function signInWithPassword(
 
 /**
  * Crear cuenta con email y contraseña.
+ * Registro público deshabilitado: solo el administrador accede con usuario creado manualmente.
  */
 export async function signUpWithPassword(
   _prevState: AuthState,
-  formData: FormData,
+  _formData: FormData,
 ): Promise<AuthState> {
-  const raw = {
-    email: formData.get("email"),
-    password: formData.get("password"),
-  };
-
-  const parsed = signUpSchema.safeParse(raw);
-  if (!parsed.success) {
-    const fieldErrors: AuthState["fieldErrors"] = {};
-    for (const issue of parsed.error.issues) {
-      const path = issue.path[0];
-      if (path === "email" && !fieldErrors.email) fieldErrors.email = issue.message;
-      if (path === "password" && !fieldErrors.password) fieldErrors.password = issue.message;
-    }
-    return { status: "error", fieldErrors };
-  }
-
-  const { email, password } = parsed.data;
-  const supabase = await createSupabaseServerClient();
-  const baseUrl = getBaseUrl();
-
-  const { data, error } = await supabase.auth.signUp({
-    email,
-    password,
-    options: {
-      emailRedirectTo: `${baseUrl}/auth/callback`,
-    },
-  });
-
-  if (error) {
-    return { status: "error", message: toAuthErrorMessage(error) };
-  }
-
-  // Si hay sesión, el email ya está confirmado (autoconfirm habilitado)
-  // o el proveedor no requiere confirmación. Redirigimos directamente.
-  if (data.session) {
-    const next = sanitizeNextPath(formData.get("next")?.toString() ?? null);
-    redirect(next);
-  }
-
-  // Sin sesión: requiere confirmación por email.
   return {
-    status: "success",
-    needsEmailConfirmation: true,
-    message:
-      "Te enviamos un correo para confirmar tu cuenta. Revisa tu bandeja de entrada (y la carpeta de spam).",
+    status: "error",
+    message: "El registro público está deshabilitado. Acceso solo para administrador.",
   };
 }
 
 /**
  * Enviar enlace mágico (OTP) al correo.
+ * Deshabilitado: el acceso es solo con usuario creado manualmente desde el dashboard.
  */
-export async function sendMagicLink(_prevState: AuthState, formData: FormData): Promise<AuthState> {
-  const raw = {
-    email: formData.get("email"),
-  };
-
-  const parsed = magicLinkSchema.safeParse(raw);
-  if (!parsed.success) {
-    const fieldErrors: AuthState["fieldErrors"] = {};
-    for (const issue of parsed.error.issues) {
-      const path = issue.path[0];
-      if (path === "email" && !fieldErrors.email) fieldErrors.email = issue.message;
-    }
-    return { status: "error", fieldErrors };
-  }
-
-  const { email } = parsed.data;
-  const supabase = await createSupabaseServerClient();
-  const baseUrl = getBaseUrl();
-
-  const { error } = await supabase.auth.signInWithOtp({
-    email,
-    options: {
-      emailRedirectTo: `${baseUrl}/auth/callback`,
-      // shouldCreateUser: true por defecto (crea cuenta si no existe)
-    },
-  });
-
-  if (error) {
-    return { status: "error", message: toAuthErrorMessage(error) };
-  }
-
+export async function sendMagicLink(_prevState: AuthState, _formData: FormData): Promise<AuthState> {
   return {
-    status: "success",
-    message:
-      "Te enviamos un enlace de acceso a tu correo. Ábrelo para entrar. Si no lo ves, revisa la carpeta de spam.",
+    status: "error",
+    message: "Los enlaces mágicos están deshabilitados. Usa email y contraseña.",
   };
 }
 

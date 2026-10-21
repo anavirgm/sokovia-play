@@ -12,15 +12,11 @@ export const metadata: Metadata = {
 };
 
 /**
- * Página de cuenta protegida.
+ * Página de cuenta.
  *
- * Con `cacheComponents` habilitado, leer `cookies()` (a través de
- * `createSupabaseServerClient`) convierte la ruta en dinámica. No es necesario
- * `export const dynamic = "force-dynamic"` porque esa opción fue eliminada
- * en Next 16 con Cache Components; Next hace la ruta dinámica automáticamente.
- *
- * La verificación real de sesión ocurre aquí (defensa en profundidad).
- * El proxy también redirige de forma optimista, pero la página nunca confía solo en él.
+ * Con auth exclusivo para admin, esta página ya no es obligatoria para ver
+ * el catálogo. La mantenemos por si se necesita, pero no está protegida.
+ * Úsala solo para revisar la sesión si acaso.
  */
 export default async function AccountPage() {
   const user = await getCurrentUser();

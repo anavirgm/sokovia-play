@@ -112,26 +112,17 @@ export function LoginForm({
           <Notice
             icon={<TriangleAlert className="size-6" aria-hidden="true" />}
             title="No pudimos completar la entrada"
-            description="El enlace ha caducado o es inválido. Solicita un nuevo enlace mágico o inicia sesión con contraseña."
+            description="El enlace ha caducado o es inválido. Solicita un nuevo enlace o inicia sesión con contraseña."
           />
         )}
 
         {mode !== "magic" && (
           <nav
-            className="grid grid-cols-2 gap-1 rounded-lg border border-border bg-background/60 p-1"
+            className="grid grid-cols-1 gap-1 rounded-lg border border-border bg-background/60 p-1"
             aria-label="Modo de autenticación"
           >
-            <TabLink
-              href={`/login?next=${encodeURIComponent(nextPath)}`}
-              active={mode === "signin"}
-            >
-              Iniciar sesión
-            </TabLink>
-            <TabLink
-              href={`/login?mode=signup&next=${encodeURIComponent(nextPath)}`}
-              active={mode === "signup"}
-            >
-              Crear cuenta
+            <TabLink href={`/login?next=${encodeURIComponent(nextPath)}`} active={mode === "signin"}>
+              Acceso administrador
             </TabLink>
           </nav>
         )}
@@ -280,74 +271,22 @@ export function LoginForm({
               <FieldError message={magicState.fieldErrors?.email} />
             </div>
             <Button type="submit" size="lg" disabled={magicPending}>
-              {magicPending ? "Enviando..." : "Enviar enlace mágico"}
+              {magicPending ? "Enviando..." : "Enviar enlace"}
             </Button>
           </form>
         )}
 
         {/* Navegación entre modos */}
         <footer className="flex flex-col items-center gap-2 text-center text-sm text-muted">
-          {mode === "signin" && (
-            <>
-              <p>
-                ¿No tienes cuenta?{" "}
-                <Link
-                  href={`/login?mode=signup&next=${encodeURIComponent(nextPath)}`}
-                  className="font-medium text-brand-soft hover:text-foreground"
-                >
-                  Crear cuenta
-                </Link>
-              </p>
-              <p>
-                <Link
-                  href={`/login?mode=magic&next=${encodeURIComponent(nextPath)}`}
-                  className="font-medium text-brand-soft hover:text-foreground"
-                >
-                  Recibir un enlace mágico
-                </Link>
-              </p>
-            </>
-          )}
-          {mode === "signup" && (
-            <>
-              <p>
-                ¿Ya tienes cuenta?{" "}
-                <Link
-                  href={`/login?next=${encodeURIComponent(nextPath)}`}
-                  className="font-medium text-brand-soft hover:text-foreground"
-                >
-                  Iniciar sesión
-                </Link>
-              </p>
-              <p>
-                <Link
-                  href={`/login?mode=magic&next=${encodeURIComponent(nextPath)}`}
-                  className="font-medium text-brand-soft hover:text-foreground"
-                >
-                  Recibir un enlace mágico
-                </Link>
-              </p>
-            </>
-          )}
           {mode === "magic" && (
-            <>
-              <p>
-                <Link
-                  href={`/login?next=${encodeURIComponent(nextPath)}`}
-                  className="font-medium text-brand-soft hover:text-foreground"
-                >
-                  Iniciar sesión con contraseña
-                </Link>
-              </p>
-              <p>
-                <Link
-                  href={`/login?mode=signup&next=${encodeURIComponent(nextPath)}`}
-                  className="font-medium text-brand-soft hover:text-foreground"
-                >
-                  Crear cuenta
-                </Link>
-              </p>
-            </>
+            <p>
+              <Link
+                href={`/login?next=${encodeURIComponent(nextPath)}`}
+                className="font-medium text-brand-soft hover:text-foreground"
+              >
+                Iniciar sesión con contraseña
+              </Link>
+            </p>
           )}
           <p className="pt-2">
             <Link href="/" className="hover:text-foreground">

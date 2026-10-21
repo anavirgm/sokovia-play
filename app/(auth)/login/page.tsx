@@ -4,8 +4,8 @@ import { Container } from "@/components/layout/container";
 import { LoginForm } from "@/components/auth/login-form";
 
 export const metadata: Metadata = {
-  title: "Acceso | SokoviaPlay",
-  description: "Inicia sesión o crea una cuenta en SokoviaPlay.",
+  title: "Acceso administrador | SokoviaPlay",
+  description: "Acceso al panel de administración de SokoviaPlay.",
 };
 
 type AuthMode = "signin" | "signup" | "magic";
@@ -19,10 +19,10 @@ function parseMode(raw: string | string[] | undefined): AuthMode {
 
 function parseNext(raw: string | string[] | undefined): string {
   const value = Array.isArray(raw) ? raw[0] : raw;
-  if (!value) return "/account";
-  if (!value.startsWith("/")) return "/account";
-  if (value.startsWith("//")) return "/account";
-  if (value.startsWith("/login")) return "/account";
+  if (!value) return "/admin";
+  if (!value.startsWith("/")) return "/admin";
+  if (value.startsWith("//")) return "/admin";
+  if (value.startsWith("/login")) return "/admin";
   return value;
 }
 
