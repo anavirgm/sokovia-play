@@ -2,10 +2,12 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { LogIn, Menu, Search, X } from "lucide-react";
+import { LogIn, Menu, Search, User, X } from "lucide-react";
 
+import { createSupabaseBrowserClient } from "@/lib/supabase/client";
 import { Button, Input } from "@/components/ui";
 import { navItems } from "@/constants/navigation";
+import type { User as SupabaseUser } from "@supabase/supabase-js";
 
 /**
  * Menú principal en móvil y tablet. El panel se monta bajo el header y cierra
@@ -13,6 +15,25 @@ import { navItems } from "@/constants/navigation";
  */
 export function MobileNav() {
   const [open, setOpen] = useState(false);
+  const [user, setUser] = useState<SupabaseUser | null>(null);
+
+  useEffect(() => {
+    const supabase = createSupabaseBrowserClient();
+
+    supabase.auth.getSession().then(({ data }) => {
+      setUser(data.session?.user ?? null);
+    });
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, []);
 
   useEffect(() => {
     if (!open) return;
@@ -79,10 +100,25 @@ export function MobileNav() {
             />
           </form>
 
-          <Button block className="mt-3">
-            <LogIn aria-hidden="true" />
-            Iniciar sesión
-          </Button>
+          {user ? (
+            <Link
+              href="/account"
+              onClick={() => setOpen(false)}
+              className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand-strong px-7 py-3 text-base font-medium text-white transition-colors hover:bg-brand-deep"
+            >
+              <User aria-hidden="true" className="size-5" />
+              Mi cuenta
+            </Link>
+          ) : (
+            <Link
+              href="/login"
+              onClick={() => setOpen(false)}
+              className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand-strong px-7 py-3 text-base font-medium text-white transition-colors hover:bg-brand-deep"
+            >
+              <LogIn aria-hidden="true" className="size-5" />
+              Iniciar sesión
+            </Link>
+          )}
         </nav>
       </div>
     </div>

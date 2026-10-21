@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowLeft, CircleCheck, Info, Play, TriangleAlert } from "lucide-react";
 
 import { MovieCard, MovieCardSkeleton, MovieSlider, SliderSkeleton } from "@/components/catalog";
+import { AuthNav, LoginForm, SignOutButton } from "@/components/auth";
 import { Container } from "@/components/layout/container";
 import { Badge, Button, Input, Skeleton, Spinner } from "@/components/ui";
 import {
@@ -308,6 +309,25 @@ export default function DesignSystemPage() {
               <MovieCard key={movie.id} movie={movie} href="/" />
             ))}
           </MovieSlider>
+        </Section>
+
+        <Section
+          title="Autenticación"
+          description="Acceso con email/contraseña y enlace mágico. El header usa AuthNav (cliente) para mostrar 'Iniciar sesión' o 'Mi cuenta' sin convertir las páginas en dinámicas. Los formularios usan acciones de servidor con validación Zod."
+        >
+          <div className="flex flex-col gap-6">
+            <div className="flex flex-wrap items-center gap-3 rounded-xl border border-border bg-surface/60 p-4">
+              <span className="text-sm text-muted">AuthNav (estado sin sesión):</span>
+              <AuthNav />
+            </div>
+            <div className="flex flex-wrap items-center gap-3">
+              <span className="text-sm text-muted">SignOutButton:</span>
+              <SignOutButton />
+            </div>
+            <div className="max-w-xl">
+              <LoginForm mode="signin" nextPath="/account" />
+            </div>
+          </div>
         </Section>
       </Container>
     </main>

@@ -1,9 +1,10 @@
 import Link from "next/link";
 import { Search, ShieldCheck } from "lucide-react";
 
+import { AuthNav } from "@/components/auth/auth-nav";
 import { Container } from "@/components/layout/container";
 import { MobileNav } from "@/components/layout/mobile-nav";
-import { Button, Input } from "@/components/ui";
+import { Input } from "@/components/ui";
 import { navItems } from "@/constants/navigation";
 
 /** Barra superior fija, translúcida, con navegación, búsqueda y acceso. */
@@ -69,7 +70,7 @@ export function Header() {
             />
           </form>
 
-          <Button className="hidden sm:inline-flex">Iniciar sesión</Button>
+          <AuthNav className="hidden sm:inline-flex" />
 
           <MobileNav />
         </div>
