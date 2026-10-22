@@ -33,11 +33,7 @@ export async function generateMetadata({
   };
 }
 
-export default async function WatchPage({
-  params,
-}: {
-  params: Promise<{ tmdb_id: string }>;
-}) {
+export default async function WatchPage({ params }: { params: Promise<{ tmdb_id: string }> }) {
   const { tmdb_id } = await params;
   const id = Number(tmdb_id);
 
@@ -125,7 +121,8 @@ export default async function WatchPage({
           <div className="flex flex-col items-center justify-center gap-3 rounded-xl border border-border bg-surface/60 py-16 text-center">
             <p className="text-lg font-medium">Sin servidor disponible</p>
             <p className="max-w-md text-pretty text-muted">
-              No hay fuentes de reproducción activas para esta película. Vuelve más tarde o prueba otro título.
+              No hay fuentes de reproducción activas para esta película. Vuelve más tarde o prueba
+              otro título.
             </p>
             <Link
               href={`/movies/${movie.id}`}

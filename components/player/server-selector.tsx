@@ -63,7 +63,11 @@ export function ServerSelector({ sources, value, onChange, className }: ServerSe
   }
 
   return (
-    <div className={cn("flex flex-wrap items-center gap-2", className)} role="group" aria-label="Seleccionar servidor">
+    <div
+      className={cn("flex flex-wrap items-center gap-2", className)}
+      role="group"
+      aria-label="Seleccionar servidor"
+    >
       <span className="text-sm text-muted">Servidor:</span>
       {sources.map((source) => {
         const isActive = selectedId === source.id;
@@ -77,7 +81,7 @@ export function ServerSelector({ sources, value, onChange, className }: ServerSe
               "rounded-lg px-3 py-1.5 text-sm font-medium transition-colors",
               isActive
                 ? "bg-brand-strong text-white"
-                : "border border-border bg-surface text-muted hover:text-foreground hover:bg-surface-hover",
+                : "border border-border bg-surface text-muted hover:bg-surface-hover hover:text-foreground",
             )}
           >
             {source.name}

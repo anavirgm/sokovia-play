@@ -44,7 +44,9 @@ export async function generateMetadata({
     openGraph: {
       title: movie.title,
       description,
-      images: movie.backdrop_path ? [`https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`] : undefined,
+      images: movie.backdrop_path
+        ? [`https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`]
+        : undefined,
     },
   };
 }
@@ -53,9 +55,13 @@ function getTrailer(videos?: { results: TmdbVideo[] }) {
   if (!videos?.results?.length) return null;
   const results = videos.results;
   // Prefer official trailer in Spanish, else any trailer, else teaser
-  const officialEs = results.find((v) => v.site === "YouTube" && v.type === "Trailer" && v.official && v.iso_639_1 === "es");
+  const officialEs = results.find(
+    (v) => v.site === "YouTube" && v.type === "Trailer" && v.official && v.iso_639_1 === "es",
+  );
   if (officialEs) return officialEs;
-  const trailerEs = results.find((v) => v.site === "YouTube" && v.type === "Trailer" && v.iso_639_1 === "es");
+  const trailerEs = results.find(
+    (v) => v.site === "YouTube" && v.type === "Trailer" && v.iso_639_1 === "es",
+  );
   if (trailerEs) return trailerEs;
   const official = results.find((v) => v.site === "YouTube" && v.type === "Trailer" && v.official);
   if (official) return official;
@@ -143,7 +149,9 @@ export default async function MovieDetailPage({
                 {movie.title}
               </h1>
               {movie.tagline && (
-                <p className="text-lg text-pretty text-muted italic">&ldquo;{movie.tagline}&rdquo;</p>
+                <p className="text-lg text-pretty text-muted italic">
+                  &ldquo;{movie.tagline}&rdquo;
+                </p>
               )}
               <div className="flex flex-wrap items-center gap-4 text-sm text-muted">
                 {year && (
@@ -162,7 +170,9 @@ export default async function MovieDetailPage({
                   <span className="flex items-center gap-1.5">
                     <Star className="size-4 fill-brand-soft text-brand-soft" aria-hidden="true" />
                     {vote} / 10
-                    <span className="text-muted/70">({movie.vote_count.toLocaleString("es-ES")})</span>
+                    <span className="text-muted/70">
+                      ({movie.vote_count.toLocaleString("es-ES")})
+                    </span>
                   </span>
                 )}
               </div>
@@ -183,7 +193,7 @@ export default async function MovieDetailPage({
             {movie.overview && (
               <section className="flex flex-col gap-2">
                 <h2 className="text-lg font-semibold tracking-tight">Sinopsis</h2>
-                <p className="max-w-3xl text-pretty leading-relaxed text-muted">{movie.overview}</p>
+                <p className="max-w-3xl leading-relaxed text-pretty text-muted">{movie.overview}</p>
               </section>
             )}
 

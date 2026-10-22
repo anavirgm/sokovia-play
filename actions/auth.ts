@@ -91,7 +91,10 @@ export async function signUpWithPassword(
  * Enviar enlace mágico (OTP) al correo.
  * Deshabilitado: el acceso es solo con usuario creado manualmente desde el dashboard.
  */
-export async function sendMagicLink(_prevState: AuthState, _formData: FormData): Promise<AuthState> {
+export async function sendMagicLink(
+  _prevState: AuthState,
+  _formData: FormData,
+): Promise<AuthState> {
   return {
     status: "error",
     message: "Los enlaces mágicos están deshabilitados. Usa email y contraseña.",

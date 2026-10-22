@@ -121,7 +121,10 @@ export function LoginForm({
             className="grid grid-cols-1 gap-1 rounded-lg border border-border bg-background/60 p-1"
             aria-label="Modo de autenticación"
           >
-            <TabLink href={`/login?next=${encodeURIComponent(nextPath)}`} active={mode === "signin"}>
+            <TabLink
+              href={`/login?next=${encodeURIComponent(nextPath)}`}
+              active={mode === "signin"}
+            >
               Acceso administrador
             </TabLink>
           </nav>

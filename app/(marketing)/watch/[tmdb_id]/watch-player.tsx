@@ -21,7 +21,11 @@ export function WatchPlayer({ sources, title }: WatchPlayerProps) {
 
   return (
     <div className="flex flex-col gap-4">
-      <VideoPlayer url={currentSource.url} type={currentSource.type} title={`Reproducir ${title}`} />
+      <VideoPlayer
+        url={currentSource.url}
+        type={currentSource.type}
+        title={`Reproducir ${title}`}
+      />
       <ServerSelector sources={sources} value={currentSource.id} onChange={setCurrentSource} />
     </div>
   );
