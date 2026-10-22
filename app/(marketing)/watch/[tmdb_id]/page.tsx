@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 
 import { Container } from "@/components/layout/container";
 import { getMovieDetails } from "@/lib/tmdb/queries";
@@ -33,16 +34,23 @@ export async function generateMetadata({
   };
 }
 
-export default async function WatchPage({ params }: { params: Promise<{ tmdb_id: string }> }) {
-  const { tmdb_id } = await params;
-  const id = Number(tmdb_id);
-
-  if (!Number.isInteger(id) || id <= 0) {
-    notFound();
+function getVidsrcUrl(tmdbId: number): string {
+  const base = process.env.NEXT_PUBLIC_VIDSRC_BASE_URL?.trim();
+  if (base) {
+    if (base.includes("{id}") || base.includes("{tmdb_id}")) {
+      return base.replace("{id}", String(tmdbId)).replace("{tmdb_id}", String(tmdbId));
+    }
+    if (base.endsWith("/")) {
+      return `${base}${tmdbId}`;
+    }
+    return `${base.replace(/\/movie\/?$/, "")}/movie/${tmdbId}`;
   }
+  return `https://vidsrc.to/embed/movie/${tmdbId}`;
+}
 
+async function WatchContent({ tmdbId }: { tmdbId: number }) {
   const [movieResult, supabase] = await Promise.all([
-    getMovieDetails(id, ["videos"]),
+    getMovieDetails(tmdbId, ["videos"]),
     createSupabaseServerClient(),
   ]);
 
@@ -56,7 +64,7 @@ export default async function WatchPage({ params }: { params: Promise<{ tmdb_id:
   const { data: dbMovie } = await supabase
     .from("movies")
     .select("id")
-    .eq("tmdb_id", id)
+    .eq("tmdb_id", tmdbId)
     .maybeSingle();
 
   let sources: PlayerSource[] = [];
@@ -69,7 +77,7 @@ export default async function WatchPage({ params }: { params: Promise<{ tmdb_id:
       .eq("is_active", true)
       .order("sort_order", { ascending: true });
 
-    if (data) {
+    if (data && data.length > 0) {
       sources = data.map((s) => ({
         id: s.id,
         name: s.name,
@@ -81,7 +89,20 @@ export default async function WatchPage({ params }: { params: Promise<{ tmdb_id:
     }
   }
 
-  // Si no hay fuentes embed/youtube en DB, usar trailer de YouTube como fallback
+  // vidsrc.to como principal si no hay fuentes configuradas
+  if (sources.length === 0) {
+    sources = [
+      {
+        id: "vidsrc-primary",
+        name: "Vidsrc",
+        type: "embed",
+        url: getVidsrcUrl(tmdbId),
+        quality: "auto",
+      },
+    ];
+  }
+
+  // Si por algún motivo no hay nada, caer al trailer de YouTube
   if (sources.length === 0 && movie.videos?.results?.length) {
     const trailer =
       movie.videos.results.find((v) => v.site === "YouTube" && v.type === "Trailer") ??
@@ -97,6 +118,53 @@ export default async function WatchPage({ params }: { params: Promise<{ tmdb_id:
       ];
     }
   }
+
+  if (sources.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center gap-3 rounded-xl border border-border bg-surface/60 py-16 text-center">
+        <p className="text-lg font-medium">Sin servidor disponible</p>
+        <p className="max-w-md text-pretty text-muted">
+          No hay fuentes de reproducción disponibles para esta película.
+        </p>
+        <Link
+          href={`/movies/${movie.id}`}
+          className="mt-2 inline-flex items-center gap-2 rounded-xl bg-surface px-4 py-2 text-sm font-medium transition-colors hover:bg-surface-hover"
+        >
+          Ver ficha
+        </Link>
+      </div>
+    );
+  }
+
+  return <WatchPlayer sources={sources} title={movie.title} />;
+}
+
+function WatchFallback() {
+  return (
+    <div className="flex flex-col gap-4">
+      <div className="aspect-video w-full animate-pulse rounded-xl bg-surface/60" />
+      <div className="flex gap-2">
+        <div className="h-9 w-24 animate-pulse rounded-lg bg-surface/60" />
+        <div className="h-9 w-24 animate-pulse rounded-lg bg-surface/60" />
+      </div>
+    </div>
+  );
+}
+
+export default async function WatchPage({ params }: { params: Promise<{ tmdb_id: string }> }) {
+  const { tmdb_id } = await params;
+  const id = Number(tmdb_id);
+
+  if (!Number.isInteger(id) || id <= 0) {
+    notFound();
+  }
+
+  const movieResult = await getMovieDetails(id);
+  if (!movieResult.ok) {
+    notFound();
+  }
+
+  const movie = movieResult.data;
 
   return (
     <main className="flex flex-1 flex-col py-6 sm:py-8">
@@ -115,23 +183,9 @@ export default async function WatchPage({ params }: { params: Promise<{ tmdb_id:
           </div>
         </header>
 
-        {sources.length > 0 ? (
-          <WatchPlayer sources={sources} title={movie.title} />
-        ) : (
-          <div className="flex flex-col items-center justify-center gap-3 rounded-xl border border-border bg-surface/60 py-16 text-center">
-            <p className="text-lg font-medium">Sin servidor disponible</p>
-            <p className="max-w-md text-pretty text-muted">
-              No hay fuentes de reproducción activas para esta película. Vuelve más tarde o prueba
-              otro título.
-            </p>
-            <Link
-              href={`/movies/${movie.id}`}
-              className="mt-2 inline-flex items-center gap-2 rounded-xl bg-surface px-4 py-2 text-sm font-medium transition-colors hover:bg-surface-hover"
-            >
-              Ver ficha
-            </Link>
-          </div>
-        )}
+        <Suspense fallback={<WatchFallback />}>
+          <WatchContent tmdbId={id} />
+        </Suspense>
       </Container>
     </main>
   );
