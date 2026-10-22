@@ -1,73 +1,17 @@
-SokoviaPlay - Tareas manuales para #16 (Supabase Auth)
-==========================================================
 
-#16 añade autenticación con email/contraseña + enlace mágico, rutas /login y /account,
-protección optimista en proxy.ts y persistencia SSR con cookies (@supabase/ssr).
+CAMBIOS APLICADOS (admin-only auth)
+===================================
+- Solo /admin esta protegido. Todo lo demas (home, catalogo, explorar, buscar, ver pelicula) es publico.
+- /login ahora es solo para acceso administrador.
+- Registro publico y magic link deshabilitados.
+- Redireccion tras login va a /admin.
+- proxy.ts solo protege /admin.
 
-QUÉ HAY QUE HACER EN EL PROYECTO DE SUPABASE (Dashboard)
----------------------------------------------------------
+QUE HACER EN SUPABASE
+=====================
+1. Authentication > Providers > Email: desactivar \"Allow new users to sign up\" (evita registros publicos)
+2. Authentication > Users: crear tu usuario manualmente (Add user) con email+contrasena, marcar como Confirmed
+3. Ir a Table Editor > profiles: asignarle role = 'admin' al usuario creado
+4. Authentication > URL Configuration: añadir http://localhost:3000/auth/callback si vas a usar redirecciones
 
-1) CONFIGURAR URLS DE REDIRECCIÓN (obligatorio para magic link / confirmación)
-   - Ir a Authentication > URL Configuration
-   - Site URL: http://localhost:3000 (para desarrollo local)
-   - Redirect URLs (añadir estas):
-     - http://localhost:3000/auth/callback
-     - http://localhost:3000/auth/callback/**
-   - En producción, añadir también la URL de despliegue con los mismos patrones.
-
-2) CONFIGURAR SMTP (obligatorio para que lleguen los emails a usuarios reales)
-   El proyecto usa el SMTP por defecto de Supabase: SOLO envía emails a
-   miembros del proyecto y tiene límites de rate. Para que magic link y
-   confirmación de email funcionen para cualquier usuario, hay que configurar
-   un proveedor SMTP propio.
-
-   Opciones:
-   - Resend (https://resend.com/) - fácil, tiene free tier
-   - Brevo, SendGrid, Postmark, Amazon SES, etc.
-
-   Ruta: Authentication > Email > SMTP Settings
-   - Activar "Enable Custom SMTP"
-   - Rellenar Host, Port, Username, Password, Sender email, Sender name
-   - Guardar y probar con "Send test email"
-
-   Sin SMTP configurado:
-   - Los emails de magic link/confirmación NO llegarán a cuentas ajenas al equipo
-   - Puedes seguir usando login/registro con contraseña si la confirmación está desactivada
-   - Para pruebas locales rápidas, puedes confirmar usuarios con la Service Role Key
-     (el endpoint admin de Supabase), o desactivar temporalmente la confirmación
-
-3) CONFIGURACIÓN DE EMAIL CONFIRMATION (según lo que quieras probar)
-   Ruta: Authentication > Providers > Email
-   - "Confirm email" (Enable email confirmations): actualmente false en este proyecto
-     (mailer_autoconfirm=false)
-   - Si lo activas, los nuevos registros con contraseña requerirán confirmar el email
-     antes de poder iniciar sesión. El flujo ya está implementado para mostrar ese aviso.
-
-   Estado actual detectado:
-   - Email provider: enabled
-   - Signups: enabled (disable_signup=false)
-   - mailer_autoconfirm: false
-
-CÓMO PROBARLO LOCALMENTE
-------------------------
-1. Copiar .env.local ya existe con las claves de Supabase.
-2. npm run dev (o ya hay servidor)
-3. Ir a http://localhost:3000/login
-   - Crear cuenta con email/contraseña -> si no hay autoconfirmación, te pedirá confirmar
-   - Iniciar sesión con email/contraseña
-   - "Recibir un enlace mágico" -> envía OTP (necesita SMTP o usar cuenta del equipo)
-4. Ir a http://localhost:3000/account -> protegido, redirige a /login si no hay sesión
-5. Cerrar sesión desde /account
-
-NOTAS TÉCNICAS
---------------
-- Las cookies de sesión se gestionan con @supabase/ssr (HttpOnly). La validación SSR
-  se hace en páginas/acciones con createSupabaseServerClient().
-- proxy.ts refresca la sesión en cada request y protege /account de forma optimista.
-- El header usa un componente cliente (AuthNav) para mostrar "Iniciar sesión"/"Mi cuenta"
-  sin convertir todas las páginas en dinámicas.
-- Las acciones de auth están en actions/auth.ts (Server Actions) con validación Zod.
-- El callback está en app/(auth)/auth/callback/route.ts
-
-Si hay algún problema con las redirecciones, revisar primero las URLs permitidas
-en el dashboard de Supabase (punto 1). Ahí suelen fallar los magic links.
+SMTP: NO NECESARIO si solo usas email+contrasena con usuario creado manualmente.
