@@ -45,6 +45,7 @@ export function ServerSelector({ sources, value, onChange, className }: ServerSe
   // Sincronizar con value externo
   useEffect(() => {
     if (value && value !== selectedId) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setSelectedId(value);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
