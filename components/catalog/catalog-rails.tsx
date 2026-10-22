@@ -40,7 +40,7 @@ async function CatalogRailsContent() {
   return rails.map((rail) => (
     <MovieSlider key={rail.key} heading={rail.heading}>
       {rail.movies.map((movie) => (
-        <MovieCard key={movie.id} movie={movie} />
+        <MovieCard key={movie.id} movie={movie} href={`/movies/${movie.id}`} />
       ))}
     </MovieSlider>
   ));
