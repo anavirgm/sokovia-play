@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { Search, ShieldCheck } from "lucide-react";
 
-import { AuthNav } from "@/components/auth/auth-nav";
 import { Container } from "@/components/layout/container";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import { Input } from "@/components/ui";
@@ -69,8 +68,6 @@ export function Header() {
               className="h-10 w-52 pl-9 xl:w-72 [&::-webkit-search-cancel-button]:appearance-none"
             />
           </form>
-
-          <AuthNav className="hidden sm:inline-flex" />
 
           <MobileNav />
         </div>

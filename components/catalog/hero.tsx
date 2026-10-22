@@ -2,7 +2,6 @@ import Link from "next/link";
 import { CirclePlay, Play, Star } from "lucide-react";
 
 import { buttonVariants } from "@/components/ui";
-import { CATALOG_ANCHOR } from "@/constants/landing";
 import type { HeroContent } from "@/features/catalog/hero";
 import { tmdbImageUrl } from "@/lib/tmdb/image";
 import { cn } from "@/utils/cn";
@@ -85,15 +84,12 @@ export function Hero({ content }: { content: HeroContent }) {
           </p>
 
           <div className="animate-enter flex flex-wrap items-center gap-3 pt-1 [animation-delay:320ms]">
-            {/* La ficha de la película (#18) aún no existe: la acción principal
-                salta al catálogo, que sí está en la página, en vez de dejar un
-                enlace roto. Se reapunta a la ficha cuando esa ruta exista. */}
             <Link
-              href={CATALOG_ANCHOR}
+              href={`/movies/${content.id}`}
               className={cn(buttonVariants({ size: "lg" }), "h-13 text-base sm:text-lg")}
             >
               <Play aria-hidden="true" />
-              Ver ahora
+              Ver película
             </Link>
 
             {trailer ? (

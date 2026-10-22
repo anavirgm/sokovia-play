@@ -61,7 +61,7 @@ export async function SearchResults({ query, page }: SearchResultsProps) {
       <MovieGrid>
         {outcome.movies.map((movie) => (
           <li key={movie.id}>
-            <MovieCard movie={movie} />
+            <MovieCard movie={movie} href={`/movies/${movie.id}`} />
           </li>
         ))}
       </MovieGrid>

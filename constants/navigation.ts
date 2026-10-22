@@ -14,5 +14,4 @@ export const navItems: NavItem[] = [
   { label: "Inicio", href: "/" },
   { label: "Catálogo", href: "/#catalogo" },
   { label: "Explorar", href: "/explore" },
-  { label: "Design system", href: "/design" },
 ];

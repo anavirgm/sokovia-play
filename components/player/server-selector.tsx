@@ -37,6 +37,7 @@ export function ServerSelector({ sources, value, onChange, className }: ServerSe
     const found = last ? sources.find((s) => s.id === last) : null;
     const initial = found ?? sources[0];
     if (!initial) return;
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setSelectedId(initial.id);
     onChange(initial);
     // eslint-disable-next-line react-hooks/exhaustive-deps
