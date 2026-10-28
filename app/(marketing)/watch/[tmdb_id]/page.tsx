@@ -9,6 +9,7 @@ import { getMovieDetails } from "@/lib/tmdb/queries";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { WatchPlayer } from "./watch-player";
 import type { PlayerSource } from "@/components/player";
+import { getDefaultMovieSources } from "@/lib/player/default-sources";
 
 export async function generateMetadata({
   params,
@@ -32,20 +33,6 @@ export async function generateMetadata({
     title: `Ver ${result.data.title} | SokoviaPlay`,
     description: `Reproduce ${result.data.title} en SokoviaPlay.`,
   };
-}
-
-function getVidsrcUrl(tmdbId: number): string {
-  const base = process.env.NEXT_PUBLIC_VIDSRC_BASE_URL?.trim();
-  if (base) {
-    if (base.includes("{id}") || base.includes("{tmdb_id}")) {
-      return base.replace("{id}", String(tmdbId)).replace("{tmdb_id}", String(tmdbId));
-    }
-    if (base.endsWith("/")) {
-      return `${base}${tmdbId}`;
-    }
-    return `${base.replace(/\/movie\/?$/, "")}/movie/${tmdbId}`;
-  }
-  return `https://vidsrc.to/embed/movie/${tmdbId}`;
 }
 
 async function WatchContent({ tmdbId }: { tmdbId: number }) {
@@ -89,17 +76,9 @@ async function WatchContent({ tmdbId }: { tmdbId: number }) {
     }
   }
 
-  // vidsrc.to como principal si no hay fuentes configuradas
+  // Si no hay fuentes custom en BD, usar listado multiserver con opciones en español
   if (sources.length === 0) {
-    sources = [
-      {
-        id: "vidsrc-primary",
-        name: "Vidsrc",
-        type: "embed",
-        url: getVidsrcUrl(tmdbId),
-        quality: "auto",
-      },
-    ];
+    sources = getDefaultMovieSources(tmdbId);
   }
 
   // Si por algún motivo no hay nada, caer al trailer de YouTube
