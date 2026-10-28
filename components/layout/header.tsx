@@ -1,5 +1,6 @@
+import Image from "next/image";
 import Link from "next/link";
-import { Search, ShieldCheck } from "lucide-react";
+import { Search } from "lucide-react";
 
 import { Container } from "@/components/layout/container";
 import { MobileNav } from "@/components/layout/mobile-nav";
@@ -14,15 +15,18 @@ export function Header() {
       <Container className="flex h-16 items-center gap-3">
         <Link
           href="/"
-          aria-label="SokoviaPlay, inicio"
-          className="flex shrink-0 items-center gap-2 rounded-xl outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+          aria-label="VesperFlix, inicio"
+          className="flex shrink-0 items-center gap-2.5 rounded-xl outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
         >
-          <span className="grid size-9 place-items-center rounded-xl bg-brand/15 text-brand-soft ring-1 ring-brand/30 ring-inset">
-            <ShieldCheck className="size-5" aria-hidden="true" />
-          </span>
-          <span className="text-lg font-semibold tracking-tight">
-            Sokovia<span className="text-brand">Play</span>
-          </span>
+          <Image
+            src="/brand/vesper-mark.png"
+            alt="VesperFlix"
+            width={36}
+            height={36}
+            className="size-9 rounded-lg"
+            priority
+          />
+          <span className="text-lg font-semibold tracking-tight">VesperFlix</span>
         </Link>
 
         {/* La navegación de escritorio entra en `lg`, no en `md`: entre 768 y

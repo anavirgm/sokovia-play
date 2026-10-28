@@ -1,5 +1,5 @@
 -- ============================================================================
--- SokoviaPlay — Script inicial de Base de Datos
+-- VesperFlix — Script inicial de Base de Datos
 -- ============================================================================
 -- Plataforma   : Supabase (PostgreSQL 15+)
 -- Archivo      : supabase/schema.sql

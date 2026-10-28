@@ -26,20 +26,20 @@ export async function generateMetadata({
   const id = Number(tmdb_id);
 
   if (!Number.isInteger(id) || id <= 0) {
-    return { title: "Película no encontrada | SokoviaPlay" };
+    return { title: "Película no encontrada | VesperFlix" };
   }
 
   const result = await getMovieDetails(id);
 
   if (!result.ok) {
-    return { title: "Película no encontrada | SokoviaPlay" };
+    return { title: "Película no encontrada | VesperFlix" };
   }
 
   const movie = result.data;
   const description = movie.overview?.trim() || undefined;
 
   return {
-    title: `${movie.title} | SokoviaPlay`,
+    title: `${movie.title} | VesperFlix`,
     description,
     openGraph: {
       title: movie.title,

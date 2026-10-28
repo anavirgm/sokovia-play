@@ -24,12 +24,12 @@ const geistSans = Geist({
 
 export const metadata: Metadata = {
   title: {
-    default: "SokoviaPlay: streaming cinematográfico",
-    template: "%s · SokoviaPlay",
+    default: "VesperFlix: streaming cinematográfico",
+    template: "%s · VesperFlix",
   },
   description:
     "Plataforma de streaming híbrida: catálogo TMDB, reproductor multi-servidor y panel de administración en tiempo real.",
-  applicationName: "SokoviaPlay",
+  applicationName: "VesperFlix",
 };
 
 export const viewport: Viewport = {

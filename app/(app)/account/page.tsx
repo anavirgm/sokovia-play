@@ -7,8 +7,8 @@ import { SignOutButton } from "@/components/auth/sign-out-button";
 import { getCurrentProfile, getCurrentUser } from "@/features/auth/session";
 
 export const metadata: Metadata = {
-  title: "Mi cuenta | SokoviaPlay",
-  description: "Gestiona tu cuenta y sesión en SokoviaPlay.",
+  title: "Mi cuenta | VesperFlix",
+  description: "Gestiona tu cuenta y sesión en VesperFlix.",
 };
 
 /**

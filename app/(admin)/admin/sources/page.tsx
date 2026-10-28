@@ -4,7 +4,7 @@ import { Container } from "@/components/layout/container";
 import { Server } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Gestión de fuentes | Admin | SokoviaPlay",
+  title: "Gestión de fuentes | Admin | VesperFlix",
 };
 
 export default function AdminSourcesPage() {

@@ -5,7 +5,7 @@ import { SignOutButton } from "@/components/auth/sign-out-button";
 import { requireAdmin } from "@/features/admin/guards";
 
 export const metadata: Metadata = {
-  title: "Panel de administración | SokoviaPlay",
+  title: "Panel de administración | VesperFlix",
   description: "Gestión de películas y fuentes.",
 };
 

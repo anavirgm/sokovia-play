@@ -19,7 +19,7 @@ import { getBrowsePage } from "@/features/catalog/browse";
  */
 export const metadata: Metadata = {
   title: "Explorar",
-  description: "Recorre el catálogo de SokoviaPlay por género y descubre qué ver a continuación.",
+  description: "Recorre el catálogo de VesperFlix por género y descubre qué ver a continuación.",
 };
 
 export default function ExplorePage() {

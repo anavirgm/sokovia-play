@@ -1,7 +1,7 @@
 /**
  * Tipos de la API de TMDB (The Movie Database) — API v3.
  *
- * Solo se declaran las formas que consume SokoviaPlay (listados, detalles,
+ * Solo se declaran las formas que consume VesperFlix (listados, detalles,
  * géneros, vídeos, créditos, imágenes y configuración). Son tipos de solo
  * lectura: describen exactamente la respuesta JSON de TMDB, sin añadir lógica.
  *

@@ -18,7 +18,7 @@ import { SearchExperience, SearchExperienceFallback } from "@/components/search"
  */
 export const metadata: Metadata = {
   title: "Buscar",
-  description: "Busca películas por título en el catálogo de SokoviaPlay.",
+  description: "Busca películas por título en el catálogo de VesperFlix.",
 };
 
 export default function SearchPage({ searchParams }: PageProps<"/search">) {

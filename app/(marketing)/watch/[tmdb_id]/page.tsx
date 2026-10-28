@@ -20,18 +20,18 @@ export async function generateMetadata({
   const id = Number(tmdb_id);
 
   if (!Number.isInteger(id) || id <= 0) {
-    return { title: "Ver película | SokoviaPlay" };
+    return { title: "Ver película | VesperFlix" };
   }
 
   const result = await getMovieDetails(id);
 
   if (!result.ok) {
-    return { title: "Ver película | SokoviaPlay" };
+    return { title: "Ver película | VesperFlix" };
   }
 
   return {
-    title: `Ver ${result.data.title} | SokoviaPlay`,
-    description: `Reproduce ${result.data.title} en SokoviaPlay.`,
+    title: `Ver ${result.data.title} | VesperFlix`,
+    description: `Reproduce ${result.data.title} en VesperFlix.`,
   };
 }
 

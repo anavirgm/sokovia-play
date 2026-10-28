@@ -6,7 +6,7 @@ import { Container } from "@/components/layout/container";
 const legalPages = {
   "aviso-legal": {
     title: "Aviso Legal",
-    description: "Aviso legal de SokoviaPlay",
+    description: "Aviso legal de VesperFlix",
     content: (
       <>
         <h1>Aviso Legal</h1>
@@ -16,16 +16,16 @@ const legalPages = {
 
         <h2>1. Identificación del sitio</h2>
         <p>
-          SokoviaPlay es un sitio web de agregador de contenido audiovisual que muestra películas a
+          VesperFlix es un sitio web de agregador de contenido audiovisual que muestra películas a
           través de iframes de terceros. No alojamos, almacenamos ni distribuimos archivos de video,
           audio o cualquier tipo de contenido multimedia en nuestros servidores.
         </p>
 
         <h2>2. Naturaleza del servicio</h2>
         <p>
-          SokoviaPlay es únicamente un índice o agregador que proporciona enlaces e iframes a
+          VesperFlix es únicamente un índice o agregador que proporciona enlaces e iframes a
           servidores de terceros. Todo el contenido mostrado proviene de sitios web ajenos a
-          SokoviaPlay sobre los cuales no tenemos control, responsabilidad ni propiedad.
+          VesperFlix sobre los cuales no tenemos control, responsabilidad ni propiedad.
         </p>
 
         <h2>3. Propiedad intelectual</h2>
@@ -40,14 +40,14 @@ const legalPages = {
 
         <h2>4. Responsabilidad</h2>
         <p>
-          SokoviaPlay no se hace responsable del contenido, legalidad, exactitud o disponibilidad de
+          VesperFlix no se hace responsable del contenido, legalidad, exactitud o disponibilidad de
           los sitios web de terceros enlazados. El acceso y uso de dichos contenidos es
           responsabilidad exclusiva del usuario.
         </p>
 
         <h2>5. Uso del sitio</h2>
         <p>
-          El uso de este sitio es bajo tu propia responsabilidad. Al acceder a SokoviaPlay, aceptas
+          El uso de este sitio es bajo tu propia responsabilidad. Al acceder a VesperFlix, aceptas
           estos términos y reconoces que el contenido se encuentra alojado en servidores externos.
         </p>
       </>
@@ -55,7 +55,7 @@ const legalPages = {
   },
   privacidad: {
     title: "Política de Privacidad",
-    description: "Política de privacidad de SokoviaPlay",
+    description: "Política de privacidad de VesperFlix",
     content: (
       <>
         <h1>Política de Privacidad</h1>
@@ -64,7 +64,7 @@ const legalPages = {
         </p>
 
         <h2>1. Información que recopilamos</h2>
-        <p>SokoviaPlay recopila la mínima información necesaria para su funcionamiento:</p>
+        <p>VesperFlix recopila la mínima información necesaria para su funcionamiento:</p>
         <ul>
           <li>
             <strong>Datos de autenticación:</strong> Si inicias sesión como administrador,
@@ -122,7 +122,7 @@ const legalPages = {
   },
   terminos: {
     title: "Términos y Condiciones",
-    description: "Términos y condiciones de uso de SokoviaPlay",
+    description: "Términos y condiciones de uso de VesperFlix",
     content: (
       <>
         <h1>Términos y Condiciones</h1>
@@ -132,13 +132,13 @@ const legalPages = {
 
         <h2>1. Aceptación de los términos</h2>
         <p>
-          Al acceder y utilizar SokoviaPlay, aceptas estar sujeto a estos términos y condiciones. Si
+          Al acceder y utilizar VesperFlix, aceptas estar sujeto a estos términos y condiciones. Si
           no estás de acuerdo con alguno de ellos, no debes usar este sitio.
         </p>
 
         <h2>2. Descripción del servicio</h2>
         <p>
-          SokoviaPlay es un agregador que muestra contenido audiovisual a través de iframes de
+          VesperFlix es un agregador que muestra contenido audiovisual a través de iframes de
           terceros. <strong>NO alojamos, almacenamos ni distribuimos ningún archivo</strong> de
           video en nuestros servidores.
         </p>
@@ -160,7 +160,7 @@ const legalPages = {
 
         <h2>5. Limitación de responsabilidad</h2>
         <p>
-          SokoviaPlay no se hace responsable de daños directos, indirectos, incidentales o
+          VesperFlix no se hace responsable de daños directos, indirectos, incidentales o
           consecuentes derivados del uso del sitio. El usuario asume toda la responsabilidad por el
           acceso y uso de los contenidos de terceros.
         </p>
@@ -176,7 +176,7 @@ const legalPages = {
   },
   dmca: {
     title: "Política DMCA",
-    description: "Procedimiento de notificación DMCA de SokoviaPlay",
+    description: "Procedimiento de notificación DMCA de VesperFlix",
     content: (
       <>
         <h1>Política DMCA</h1>
@@ -186,7 +186,7 @@ const legalPages = {
 
         <h2>1. Declaración</h2>
         <p>
-          SokoviaPlay respeta los derechos de propiedad intelectual de terceros. Como agregador que
+          VesperFlix respeta los derechos de propiedad intelectual de terceros. Como agregador que
           solo muestra iframes de terceros, no alojamos contenido protegido por derechos de autor en
           nuestros servidores.
         </p>
@@ -194,7 +194,7 @@ const legalPages = {
         <h2>2. Procedimiento de notificación</h2>
         <p>
           Si eres titular de derechos de autor o su representante autorizado y consideras que algún
-          contenido accesible a través de SokoviaPlay infringe tus derechos, envía una notificación
+          contenido accesible a través de VesperFlix infringe tus derechos, envía una notificación
           por escrito con la siguiente información:
         </p>
         <ul>
@@ -214,7 +214,7 @@ const legalPages = {
 
         <h2>3. Contacto DMCA</h2>
         <p>
-          Envía tu notificación a: <strong>dmca@sokoviaplay.com</strong>
+          Envía tu notificación a: <strong>dmca@VesperFlix.com</strong>
         </p>
 
         <h2>4. Acción tras la notificación</h2>
@@ -244,12 +244,12 @@ export async function generateMetadata({
 
   if (!page) {
     return {
-      title: "Página no encontrada | SokoviaPlay",
+      title: "Página no encontrada | VesperFlix",
     };
   }
 
   return {
-    title: `${page.title} | SokoviaPlay`,
+    title: `${page.title} | VesperFlix`,
     description: page.description,
   };
 }

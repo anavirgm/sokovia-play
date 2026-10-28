@@ -19,7 +19,7 @@ const SOURCES = [
   {
     label: "YouTube",
     title: "Los tráilers",
-    body: "El tráiler oficial entra como una fuente más de la ficha, con su tipo y su orden, para incrustarlo sin salir de SokoviaPlay.",
+    body: "El tráiler oficial entra como una fuente más de la ficha, con su tipo y su orden, para incrustarlo sin salir de VesperFlix.",
   },
   {
     label: "VidSrc",

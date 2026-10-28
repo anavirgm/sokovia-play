@@ -4,7 +4,7 @@ import { Container } from "@/components/layout/container";
 import { Film } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Gestión de películas | Admin | SokoviaPlay",
+  title: "Gestión de películas | Admin | VesperFlix",
 };
 
 export default function AdminMoviesPage() {

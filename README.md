@@ -1,10 +1,10 @@
-# SokoviaPlay
+# VesperFlix
 
 > Plataforma web de streaming híbrida profesional, minimalista y cinematográfica. Desarrollada como pieza central de un **portafolio de ingeniería de software de nivel senior**.
 
 ## 1. Visión General
 
-**SokoviaPlay** es una aplicación web que combina catálogo de **TMDB**, reproducción con **vidsrc.to** (película completa) y **YouTube** (tráiler), autenticación con **Supabase**, favoritos, historial con reanudación ("Continuar Viendo") y un **Admin Dashboard** en tiempo real.
+**VesperFlix** es una aplicación web que combina catálogo de **TMDB**, reproducción con **vidsrc.to** (película completa) y **YouTube** (tráiler), autenticación con **Supabase**, favoritos, historial con reanudación ("Continuar Viendo") y un **Admin Dashboard** en tiempo real.
 
 **Stack principal:**
 - **Frontend:** [Next.js 16](https://nextjs.org/) (App Router, Turbopack) + [React 19](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/) (strict)
