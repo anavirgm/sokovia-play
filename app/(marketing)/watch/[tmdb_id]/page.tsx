@@ -136,7 +136,7 @@ async function WatchContent({ tmdbId }: { tmdbId: number }) {
     );
   }
 
-  return <WatchPlayer sources={sources} title={movie.title} />;
+  return <WatchPlayer sources={sources} title={movie.title} tmdbId={tmdbId} />;
 }
 
 function WatchFallback() {

@@ -1,4 +1,7 @@
+import { Suspense } from "react";
+
 import { CatalogRails, Hero } from "@/components/catalog";
+import { ContinueWatchingRail } from "@/components/catalog/continue-watching-rail";
 import { getHeroContent } from "@/features/catalog/hero";
 
 /**
@@ -23,6 +26,9 @@ export default async function HomePage() {
   return (
     <main className="flex flex-1 flex-col">
       {hero ? <Hero content={hero} /> : null}
+      <Suspense fallback={null}>
+        <ContinueWatchingRail />
+      </Suspense>
       <CatalogRails />
     </main>
   );

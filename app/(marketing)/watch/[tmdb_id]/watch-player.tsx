@@ -7,9 +7,10 @@ import { ServerSelector, VideoPlayer, type PlayerSource } from "@/components/pla
 type WatchPlayerProps = {
   sources: PlayerSource[];
   title: string;
+  tmdbId: number;
 };
 
-export function WatchPlayer({ sources, title }: WatchPlayerProps) {
+export function WatchPlayer({ sources, title, tmdbId }: WatchPlayerProps) {
   const [currentSource, setCurrentSource] = useState<PlayerSource | null>(() => {
     if (sources.length === 0) return null;
     return sources[0] ?? null;
@@ -25,6 +26,7 @@ export function WatchPlayer({ sources, title }: WatchPlayerProps) {
         url={currentSource.url}
         type={currentSource.type}
         title={`Reproducir ${title}`}
+        tmdbId={tmdbId}
       />
       <ServerSelector sources={sources} value={currentSource.id} onChange={setCurrentSource} />
     </div>
