@@ -79,8 +79,8 @@ export function Footer() {
           </nav>
         </Container>
 
-        <Container className="flex flex-col gap-3 pb-12">
-          <nav aria-label="Legal" className="flex flex-wrap gap-x-4 gap-y-2">
+        <Container className="flex flex-col items-center gap-4 pb-12 text-center">
+          <nav aria-label="Legal" className="flex flex-wrap justify-center gap-x-6 gap-y-2">
             {legalLinks.map((link) => (
               <Link
                 key={link.href}
