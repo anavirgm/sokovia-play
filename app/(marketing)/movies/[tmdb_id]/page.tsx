@@ -9,8 +9,6 @@ import { getMovieDetails } from "@/lib/tmdb/queries";
 import { tmdbImageUrl } from "@/lib/tmdb/image";
 import { cn } from "@/utils/cn";
 import type { TmdbMovieDetails, TmdbVideo } from "@/types/tmdb";
-import { FavoriteButton } from "@/components/favorites";
-import { isFavorite } from "@/actions/favorites";
 
 /**
  * Ficha de película (detalle).
@@ -107,7 +105,6 @@ export default async function MovieDetailPage({
   const year = movie.release_date ? movie.release_date.slice(0, 4) : null;
   const runtime = formatRuntime(movie.runtime);
   const vote = movie.vote_count > 0 ? movie.vote_average.toFixed(1) : null;
-  const isFav = await isFavorite(movie.id);
 
   return (
     <main className="flex flex-1 flex-col">
@@ -214,7 +211,6 @@ export default async function MovieDetailPage({
                   Ver tráiler
                 </a>
               )}
-              <FavoriteButton tmdbId={movie.id} isFavoriteInitial={isFav} />
             </div>
           </div>
         </Container>

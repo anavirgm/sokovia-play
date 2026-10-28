@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Heart, Search, ShieldCheck } from "lucide-react";
+import { Search, ShieldCheck } from "lucide-react";
 
 import { Container } from "@/components/layout/container";
 import { MobileNav } from "@/components/layout/mobile-nav";
@@ -68,15 +68,6 @@ export function Header() {
               className="h-10 w-52 pl-9 xl:w-72 [&::-webkit-search-cancel-button]:appearance-none"
             />
           </form>
-
-          <Link
-            href="/favorites"
-            className="hidden items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-muted transition-colors hover:bg-surface hover:text-foreground sm:flex"
-            aria-label="Mis favoritos"
-          >
-            <Heart className="size-4" aria-hidden="true" />
-            <span className="hidden md:inline">Favoritos</span>
-          </Link>
 
           <MobileNav />
         </div>
