@@ -12,6 +12,13 @@ const footerLinks: { label: string; href: string; external?: boolean }[] = [
   { label: "Iniciar sesión", href: "/login" },
 ];
 
+const legalLinks: { label: string; href: string }[] = [
+  { label: "Aviso Legal", href: "/legal/aviso-legal" },
+  { label: "Política de Privacidad", href: "/legal/privacidad" },
+  { label: "Términos y Condiciones", href: "/legal/terminos" },
+  { label: "DMCA", href: "/legal/dmca" },
+];
+
 /**
  * Pie del sitio.
  *
@@ -44,8 +51,8 @@ export function Footer() {
             </p>
 
             <p className="text-sm leading-relaxed text-muted">
-              Catálogo de TMDB, varias fuentes de reproducción por título, historial de visionado y
-              panel de administración. Un proyecto de portafolio en construcción.
+              Agregador cinematográfico impulsado por TMDB. Los contenidos se muestran a través de
+              iframes de terceros. No alojamos, almacenamos ni distribuimos archivos multimedia.
             </p>
 
             <p className="text-sm leading-relaxed text-muted">
@@ -72,7 +79,18 @@ export function Footer() {
           </nav>
         </Container>
 
-        <Container className="pb-12">
+        <Container className="flex flex-col gap-3 pb-12">
+          <nav aria-label="Legal" className="flex flex-wrap gap-x-4 gap-y-2">
+            {legalLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="text-sm text-muted transition-colors duration-200 hover:text-foreground"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
           <p className="text-sm text-muted">
             © SokoviaPlay. Proyecto de portafolio, datos de catálogo por TMDB.
           </p>

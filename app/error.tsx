@@ -7,6 +7,7 @@ import { TriangleAlert } from "lucide-react";
 import { Container } from "@/components/layout/container";
 import { Button, Notice, buttonVariants } from "@/components/ui";
 import { cn } from "@/utils/cn";
+import { logError } from "@/lib/errors/logger";
 
 /**
  * Frontera de error de todas las rutas bajo el marco raíz.
@@ -22,15 +23,13 @@ import { cn } from "@/utils/cn";
  */
 export default function RouteError({
   error,
-  retry,
+  reset,
 }: {
   error: Error & { digest?: string };
-  retry: () => void;
+  reset: () => void;
 }) {
   useEffect(() => {
-    // El registro va al navegador: en producción el mensaje no viaja en el
-    // HTML, pero la consola es donde se ve el error completo al depurar.
-    console.error(error);
+    logError(error, { scope: "route-error", digest: error.digest });
   }, [error]);
 
   return (
@@ -43,7 +42,7 @@ export default function RouteError({
             description="El contenido no pudo prepararse. Casi siempre es un fallo temporal: reintenta; si vuelve a fallar, vuelve al catálogo y prueba otro camino."
           >
             <div className="flex flex-wrap items-center justify-center gap-3">
-              <Button onClick={retry}>Reintentar</Button>
+              <Button onClick={reset}>Reintentar</Button>
               <Link href="/" className={cn(buttonVariants({ variant: "secondary" }))}>
                 Volver al catálogo
               </Link>
