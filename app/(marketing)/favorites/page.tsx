@@ -70,7 +70,10 @@ export default async function FavoritesPage() {
               };
               return (
                 <li key={favorite.id}>
-                  <MovieCard movie={cardMovie as unknown as Parameters<typeof MovieCard>[0]["movie"]} href={`/movies/${movie.tmdb_id}`} />
+                  <MovieCard
+                    movie={cardMovie as unknown as Parameters<typeof MovieCard>[0]["movie"]}
+                    href={`/movies/${movie.tmdb_id}`}
+                  />
                 </li>
               );
             })}
