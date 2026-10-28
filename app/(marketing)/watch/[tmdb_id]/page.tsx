@@ -121,16 +121,35 @@ async function WatchContent({ tmdbId }: { tmdbId: number }) {
 
   if (sources.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center gap-3 rounded-xl border border-border bg-surface/60 py-16 text-center">
-        <p className="text-lg font-medium">Sin servidor disponible</p>
-        <p className="max-w-md text-pretty text-muted">
-          No hay fuentes de reproducción disponibles para esta película.
-        </p>
+      <div className="flex flex-col items-center justify-center gap-4 rounded-xl border border-border bg-surface/60 py-16 text-center">
+        <div className="flex size-16 items-center justify-center rounded-full bg-surface">
+          <svg
+            className="size-8 text-muted"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+            />
+          </svg>
+        </div>
+        <div className="flex flex-col gap-2">
+          <p className="text-lg font-medium">Servidor no disponible</p>
+          <p className="max-w-md text-pretty text-muted">
+            No hay fuentes de reproducción activas para esta película en este momento. Vuelve más
+            tarde o prueba con otro título.
+          </p>
+        </div>
         <Link
           href={`/movies/${movie.id}`}
           className="mt-2 inline-flex items-center gap-2 rounded-xl bg-surface px-4 py-2 text-sm font-medium transition-colors hover:bg-surface-hover"
         >
-          Ver ficha
+          Volver a la ficha
         </Link>
       </div>
     );
@@ -142,10 +161,11 @@ async function WatchContent({ tmdbId }: { tmdbId: number }) {
 function WatchFallback() {
   return (
     <div className="flex flex-col gap-4">
-      <div className="aspect-video w-full animate-pulse rounded-xl bg-surface/60" />
-      <div className="flex gap-2">
-        <div className="h-9 w-24 animate-pulse rounded-lg bg-surface/60" />
-        <div className="h-9 w-24 animate-pulse rounded-lg bg-surface/60" />
+      <div className="aspect-video w-full animate-pulse rounded-xl border border-border bg-surface/60" />
+      <div className="flex flex-wrap items-center gap-2 rounded-xl border border-border bg-surface/60 p-2">
+        <div className="h-8 w-16 animate-pulse rounded-lg bg-surface-hover" />
+        <div className="h-8 w-20 animate-pulse rounded-lg bg-surface-hover" />
+        <div className="h-8 w-20 animate-pulse rounded-lg bg-surface-hover" />
       </div>
     </div>
   );
