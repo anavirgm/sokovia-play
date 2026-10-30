@@ -10,6 +10,8 @@ import { tmdbImageUrl } from "@/lib/tmdb/image";
 import { cn } from "@/utils/cn";
 import type { TmdbMovieDetails, TmdbVideo } from "@/types/tmdb";
 
+export const instant = false;
+
 /**
  * Ficha de película (detalle).
  *

@@ -5,6 +5,8 @@ import { Footer } from "@/components/layout/footer";
 import { AdminNav } from "@/components/admin/admin-nav";
 import { requireAdmin } from "@/features/admin/guards";
 
+export const instant = false;
+
 /**
  * Layout del área de administración.
  * El guard server-side se aplica aquí para proteger todas las rutas /admin.

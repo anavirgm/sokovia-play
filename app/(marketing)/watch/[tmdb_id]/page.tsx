@@ -11,6 +11,8 @@ import { WatchPlayer } from "./watch-player";
 import type { PlayerSource } from "@/components/player";
 import { getDefaultMovieSources } from "@/lib/player/default-sources";
 
+export const instant = false;
+
 export async function generateMetadata({
   params,
 }: {

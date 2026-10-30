@@ -4,6 +4,8 @@ import { Container } from "@/components/layout/container";
 import { SignOutButton } from "@/components/auth/sign-out-button";
 import { requireAdmin } from "@/features/admin/guards";
 
+export const instant = false;
+
 export const metadata: Metadata = {
   title: "Panel de administración | VesperFlix",
   description: "Gestión de películas y fuentes.",

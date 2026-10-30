@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 import { Container } from "@/components/layout/container";
 import { LoginForm } from "@/components/auth/login-form";
 
+export const instant = false;
+
 export const metadata: Metadata = {
   title: "Acceso administrador | VesperFlix",
   description: "Acceso al panel de administración de VesperFlix.",
