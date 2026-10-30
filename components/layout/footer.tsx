@@ -91,7 +91,9 @@ export function Footer() {
               </Link>
             ))}
           </nav>
-          <p className="text-sm text-muted">© VesperFlix. Proyecto de portafolio, datos de catálogo por TMDB.</p>
+          <p className="text-sm text-muted">
+            © VesperFlix. Proyecto de portafolio, datos de catálogo por TMDB.
+          </p>
         </Container>
       </div>
     </footer>

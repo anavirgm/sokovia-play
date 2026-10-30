@@ -58,7 +58,7 @@ Backend/DB (Supabase)
 ### 4.1 Estructura de carpetas
 
 ```text
-sokovia-play/
+vesperflix
 ├── app/                    # App Router: rutas, layouts, loading.tsx, error.tsx, not-found.tsx
 ├── actions/                # Server Actions (auth, favoritos, historial, CRUD admin)
 ├── components/
@@ -85,7 +85,7 @@ sokovia-play/
 ### 5.1 Clonar repositorio
 ```bash
 git clone <repo-url>
-cd sokovia-play
+cd vesperflix
 ```
 
 ### 5.2 Instalar dependencias

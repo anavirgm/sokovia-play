@@ -78,7 +78,7 @@ Reglas: marcar server-only con `import 'server-only'`. Validar con Zod en arranq
 
 ### 2.3 Estructura de Carpetas (objetivo Sprint 1)
 ```text
-sokovia-play/
+vesperflix/
 ├── app/                    # App Router (routes, layouts, loading.tsx, error.tsx, not-found.tsx, global-error.tsx)
 │   ├── (auth)/             # auth routes
 │   ├── (public)/           # home/explore/search/movies/watch/favorites

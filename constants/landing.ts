@@ -9,7 +9,7 @@
 import { genreById } from "./genres";
 
 /** Repositorio público: el destino real del proyecto durante el Sprint 1. */
-export const PROJECT_URL = "https://github.com/anavirgm/sokovia-play";
+export const PROJECT_URL = "https://github.com/anavirgm/vesperflix";
 
 /**
  * Ancla a la sección del catálogo dentro de la portada.
